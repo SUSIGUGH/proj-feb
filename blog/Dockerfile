@@ -6,5 +6,7 @@ RUN rm -f packages.mongodb.gpg
 RUN apt update && apt upgrade
 RUN apt-get install -y mongodb-org
 RUN mkdir -p /apps/blog
-ADD node /apps/blog/
 RUN mkdir /data/db/27017 -p
+ADD node /apps/blog/
+WORKDIR /apps/blog
+CMD ["sh","-c","/apps/blog/runnpm.sh"]
