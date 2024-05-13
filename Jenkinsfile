@@ -4,7 +4,8 @@ pipeline{
         //Start
         stage ("Get Files from GitHub") {
             steps{
-                echo "Connect to GitHub"
+	       sh 'pwd'
+               sh 'ls -ltr'
             }
         }
         //End
