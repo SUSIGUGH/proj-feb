@@ -5,7 +5,7 @@ pipeline{
         stage ("Get Files from GitHub") {
             steps{
 	       sh 'pwd'
-               sh 'ls -ltr'
+               sh 'ls -ltr terraform'
             }
         }
         //End
