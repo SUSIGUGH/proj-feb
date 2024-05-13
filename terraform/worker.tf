@@ -1,10 +1,10 @@
-resource "aws_instance" "kub-master" {
+resource "aws_instance" "kub-worker1" {
   ami = var.kub-ami
-  instance_type = "t2.medium"
+  instance_type = "t2.micro"
   #subnet_id = aws_subnet.sub-us-east-1a.id
   vpc_security_group_ids = [aws_security_group.kub-sg01.id]
  tags = {
-    Name = "master"
+    Name = "worker01"
   }
  key_name = "proj-feb"
  user_data = <<-EOF
@@ -25,8 +25,5 @@ resource "aws_instance" "kub-master" {
    yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
    systemctl enable kubelet
    systemctl start kubelet
-   kubeadm init --ignore-preflight-errors=all > /tmp/kubeadm.log
-   mkdir -p ~/.kube
-   cp -i /etc/kubernetes/admin.conf ~/.kube/config
  EOF
 }
