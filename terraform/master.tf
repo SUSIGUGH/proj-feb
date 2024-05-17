@@ -10,7 +10,6 @@ resource "aws_instance" "kub-master" {
  user_data = <<-EOF
    #!/bin/bash
    yum install docker -y
-   hostnamectl set-hostname master01 --> Optional
    systemctl enable docker
    systemctl restart docker
    cat <<EOF1 > /etc/yum.repos.d/kubernetes.repo
@@ -28,5 +27,9 @@ resource "aws_instance" "kub-master" {
    kubeadm init --ignore-preflight-errors=all > /tmp/kubeadm.log
    mkdir -p ~/.kube
    cp -i /etc/kubernetes/admin.conf ~/.kube/config
+   sleep 120
+   curl https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/calico.yaml -O
+   kubectl apply -f calico.yaml
+   tail -2 /tmp/kubeadm.log > /tmp/kubejoin.sh
  EOF
 }

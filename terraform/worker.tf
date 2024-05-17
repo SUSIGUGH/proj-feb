@@ -10,7 +10,6 @@ resource "aws_instance" "kub-worker1" {
  user_data = <<-EOF
    #!/bin/bash
    yum install docker -y
-   hostnamectl set-hostname master01 --> Optional
    systemctl enable docker
    systemctl restart docker
    cat <<EOF1 > /etc/yum.repos.d/kubernetes.repo
