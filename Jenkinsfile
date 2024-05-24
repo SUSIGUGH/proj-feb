@@ -25,7 +25,7 @@ pipeline{
                 echo "Creating Kubernetes Cluster please wait"
               sh 'ssh -o StrictHostKeyChecking=no -i proj-feb.pem ec2-user@172.31.23.36 "cd ~/terraform && sudo terraform init && sudo terraform apply -auto-approve"'
              sh 'sleep 30'
-             sh 'ssh -o StrictHostKeyChecking=no -i proj-feb.pem ec2-user@172.31.23.36 "cd ~/terraform && sudo terraform output | grep worker | cut -d"=" -f2 > /tmp/wip.txt"'
+             sh 'ssh -o StrictHostKeyChecking=no -i proj-feb.pem ec2-user@172.31.23.36 "cd ~/terraform && sudo terraform output | grep worker | cut -d= -f2 > /tmp/wip.txt"'
 
             }
         }
