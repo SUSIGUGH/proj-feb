@@ -28,9 +28,6 @@ This is my 1st Node.js application. It has following functionalities `(find scee
 1. Insatll Node.js [See this](https://www.guru99.com/download-install-node-js.html) for installation steps.
 2. Install MongoDB [See this](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/) for installation steps.
 
-## Installation
-1. Download the project as zip or do a git clone from [here](https://github.com/AshisRaj/Blog-Post)
-2. Go to the root dir (Blog-Post).
 3. Use the standard node app installation process to use the application (`npm install`).
     - This should install all the dependent node-modules from `package.json`.
     
