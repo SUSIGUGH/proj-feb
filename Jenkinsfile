@@ -4,7 +4,7 @@ pipeline{
         stage('Stage1'){
             steps{
                 echo 'Hello Welcome'
-                sh 'ls -ltr'
+                sh 'ls -ltra'
                 sh 'pwd'
                 sh 'rm -Rf proj-feb'
                 sh 'git clone https://github.com/SUSIGUGH/proj-feb.git'
