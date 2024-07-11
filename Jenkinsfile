@@ -5,6 +5,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 echo 'Building Docker Image'
+                sh 'ls -ltr'
             }
         }
         
