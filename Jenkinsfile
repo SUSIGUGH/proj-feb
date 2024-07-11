@@ -1,14 +1,28 @@
-pipeline{
+pipeline {
     agent any
-    stages{
-        stage('Stage1'){
-            steps{
-                echo 'Hello Welcome'
-                sh 'ls -ltr'
-                sh 'pwd'
-                sh 'rm -Rf proj-feb'
-                sh 'git clone https://github.com/SUSIGUGH/proj-feb.git'
-                sh 'cd proj-feb && ls -ltr'
+
+    stages {
+        stage('Build Docker Image') {
+            steps {
+                echo 'Building Docker Image'
+            }
+        }
+        
+        stage('Push Image to DockerHub') {
+            steps {
+                echo 'Pushing image to Docker Hub'
+            }
+        }
+        
+        stage('Create EC2 instance with minikube') {
+            steps {
+                echo 'Creating EC2 instance with minikube'
+            }
+        }
+        
+        stage('Deploy blogging site') {
+            steps {
+                echo 'Deploying the blogging site'
             }
         }
     }
