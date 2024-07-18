@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dep-blog
+  namespace: dev
+  labels:
+    app: blog
+    frontend: node
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: blog
+  template:
+    metadata:
+      name: temp-blog
+      labels:
+        app: blog
+    spec:
+      containers:
+        - name: blog
+          image: susigugh/blog:17-Jul
