@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     stages {
-        stage('Create Docker Image') {
+        stage('1 Create Docker Image') {
             steps {
                 sh 'cd proj-feb/blog && sudo docker build -t blog .'
             }
