@@ -2,6 +2,14 @@ pipeline {
     agent any
 
     stages {
+
+   stage('Git Clone') {
+            steps {
+                sh 'rm -Rf linkedtoworld'
+                sh 'git clone https://github.com/SUSIGUGH/proj-feb.git'
+            }
+        }
+
         stage('1 Create Docker Image') {
             steps {
                 sh 'cd proj-feb/blog && sudo docker build -t blog .'
