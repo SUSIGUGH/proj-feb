@@ -96,7 +96,7 @@ const local = new LocalStrategy((username, password, done) => {
         // login was successful if we have a user
         if (user) {
             // handle login success
-            console.log('login success');
+            console.log('login success Great!');
             done(null, user);
         }
 
