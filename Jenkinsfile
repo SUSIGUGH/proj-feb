@@ -2,16 +2,6 @@ pipeline {
     agent any
 
     stages {
-#        stage('Connect to GitHub') {
- #           steps {
-  #              sh 'rm -Rf proj-feb'
-   #             sh 'git clone https://github.com/SUSIGUGH/proj-feb.git'
-    #            sh 'pwd'
-     #           sh 'whoami'
-      #          sh 'ls -ltr'
-       #         
-        #    }
-        #}
         stage('Create Docker Image') {
             steps {
                 sh 'cd proj-feb/blog && sudo docker build -t blog .'
