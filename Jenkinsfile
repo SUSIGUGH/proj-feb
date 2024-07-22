@@ -33,12 +33,13 @@ pipeline {
             steps {
                 sh 'cd proj-feb && chmod 600 minikube02.pem'
                 sh 'scp -o StrictHostKeyChecking=no -i proj-feb/minikube02.pem proj-feb/*.yaml ec2-user@54.178.116.132:/home/ec2-user/'
-                sh 'ssh -o StrictHostKeyChecking=no -i proj-feb/minikube02.pem ec2-user@54.178.116.132 "cd /home/ec2-user && kubectl create -f deploy.yaml && kubectl create -f service.yaml"'
+                sh 'ssh -o StrictHostKeyChecking=no -i proj-feb/minikube02.pem ec2-user@54.178.116.132 "cd /home/ec2-user && kubectl delete -f deploy.yaml && kubectl create -f deploy.yaml && kubectl delete -f service.yaml && kubectl create -f service.yaml"'
             }
         }
         
         stage('Expose Service') {
             steps {
+               sh 'sleep 120'
                sh 'ssh -o StrictHostKeyChecking=no -i proj-feb/minikube02.pem ec2-user@54.178.116.132 "nohup kubectl port-forward --address 0.0.0.0 svc/srv-blog 30080:8080 -n dev &"'
             }
         } 
