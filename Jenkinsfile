@@ -5,7 +5,7 @@ pipeline {
 
    stage('Git Clone') {
             steps {
-                sh 'rm -Rf linkedtoworld'
+                sh 'rm -Rf proj-feb'
                 sh 'git clone https://github.com/SUSIGUGH/proj-feb.git'
             }
         }
