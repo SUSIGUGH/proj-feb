@@ -14,8 +14,9 @@ pipeline {
         stage('Docker commands'){
             steps{
                 sh 'sudo docker ps'
-                sh ' sudo docker images'
+                sh 'sudo docker images'
             }
+    }
     }
 post {
         success {
