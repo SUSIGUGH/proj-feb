@@ -24,7 +24,7 @@ pipeline {
                     passwordVariable: 'DOCKER_PASS'
                 )]) {
                     sh '''
-		    sudo docker build -t blogimg01 .
+		    cd blog && sudo docker build -t blogimg01 .
 		    sudo docker image tag blogimg01 amcnssstd/blogimg01:v1 
                     echo "$DOCKER_PASS" | sudo docker login -u "$DOCKER_USER" --password-stdin
 		    sudo docker push amcnssstd/blogimg01:v1
