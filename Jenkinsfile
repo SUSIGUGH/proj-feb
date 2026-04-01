@@ -12,7 +12,7 @@ pipeline {
 	stage('Check Files') {
 	steps {
 	sh 'ls -ltr'
-	sh 'docker ps'
+	sh 'sudo docker ps'
 	}
 	}
     }
