@@ -2,30 +2,17 @@ pipeline {
     agent any
 
     stages {
-        stage('Clone Git') {
+        stage('Checkout') {
             steps {
-                sh 'rm -Rf proj-feb'
-                sh 'git clone https://github.com/SUSIGUGH/proj-feb.git'
-                sh 'pwd'
-                sh 'ls -ltr'
-                sh 'echo "End of Stage Git"'
+                git branch: 'main',
+                    url: 'https://github.com/susigugh/proj-feb.git',
+                    credentialsId: 'git-01'
             }
         }
-        stage('Docker commands'){
-            steps{
-                sh 'sudo docker ps'
-                sh 'sudo docker images'
-            }
+	stage('Check Files') {
+	steps {
+	sh 'ls -ltr'
+	}
+	}
     }
-    }
-post {
-        success {
-             sh 'echo "Build succeeded!"'
-            sh 'echo "Build succeeded at `date`" >> susigugh-01.log'
-        }
-        failure {
-                   sh 'echo "Build failed!"'
-            sh 'echo "Build failed at `date`!" >> susigugh-01.log'
-        }
-}
 }
