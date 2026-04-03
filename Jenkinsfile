@@ -15,7 +15,9 @@ pipeline {
 	stage('Check Files') {
 	   steps {
 	      sh 'ls -ltr'
+	      retry(3) {
 	      sh 'sudo docker ps'
+	      }
         }
 	}
 
@@ -26,7 +28,6 @@ pipeline {
                     usernameVariable: 'DOCKER_USER',
                     passwordVariable: 'DOCKER_PASS'
                 )]) {
-		retry(3) {
 		sh 'sudo docker ps'
 		}
                     sh '''
@@ -38,7 +39,6 @@ pipeline {
 		    sudo docker logout
                     '''
 		}
-            }
         }
 
     }
