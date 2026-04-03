@@ -18,6 +18,7 @@ pipeline {
 
        stage('Docker Login') {
             steps {
+	    retry(3)
                 withCredentials([usernamePassword(
                     credentialsId: 'docker-01',
                     usernameVariable: 'DOCKER_USER',
