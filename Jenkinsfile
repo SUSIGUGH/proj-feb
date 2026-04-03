@@ -18,12 +18,12 @@ pipeline {
 
        stage('Docker Login') {
             steps {
-	    retry(3) {
                 withCredentials([usernamePassword(
                     credentialsId: 'docker-01',
                     usernameVariable: 'DOCKER_USER',
                     passwordVariable: 'DOCKER_PASS'
                 )]) {
+	    retry(3) {
                     sh '''
 		    cd blog && sudo docker build -t blogimg01 .
 		    sudo docker image tag blogimg01 amcnssstd/blogimg01:v1 
