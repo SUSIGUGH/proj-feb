@@ -11,14 +11,17 @@ pipeline {
         }
 	stage('Check Files') {
 	   steps {
+	   timeout(time: 100, unit: 'SECONDS') {
 	      sh 'ls -ltr'
 	      sh 'sudo docker ps'
+	      sh 'sleep 120'
+	      }
         }
 	}
 
        stage('Docker Login') {
             steps {
-	    retry(3) {
+	    retry(3)
                 withCredentials([usernamePassword(
                     credentialsId: 'docker-01',
                     usernameVariable: 'DOCKER_USER',
@@ -32,7 +35,6 @@ pipeline {
 		    sudo docker logout
                     '''
                 }
-		}
             }
         }
 
