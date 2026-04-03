@@ -26,7 +26,9 @@ pipeline {
                     usernameVariable: 'DOCKER_USER',
                     passwordVariable: 'DOCKER_PASS'
                 )])
-		}
+		{
+            sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
+        }
 		}
       
       stage('Build Image') {
@@ -41,7 +43,7 @@ sh 'sudo docker image tag blogimg01 amcnssstd/blogimg01:v1'
 }
 stage('Push the iamge to Docker Hub') {
 steps {
-sh 'echo "$DOCKER_PASS" | sudo docker login -u "$DOCKER_USER" --password-stdin'
+// sh 'echo "$DOCKER_PASS" | sudo docker login -u "$DOCKER_USER" --password-stdin'
 sh 'sudo docker push amcnssstd/blogimg01:v1'
 sh 'sudo docker logout'
 }
