@@ -15,10 +15,7 @@ pipeline {
 	stage('Check Files') {
 	   steps {
 	      sh 'ls -ltr'
-	      retry(3) {
-	      sh 'sleep 30'
 	      sh 'sudo docker ps'
-	      }
         }
 	}
 
@@ -28,19 +25,33 @@ pipeline {
                     credentialsId: 'docker-01',
                     usernameVariable: 'DOCKER_USER',
                     passwordVariable: 'DOCKER_PASS'
-                )]) {
-		sh 'sudo docker ps'
+                )])
 		}
-                    sh '''
-		    set -e
-		    cd blog && sudo docker build -t blogimg01 .
-		    sudo docker image tag blogimg01 amcnssstd/blogimg01:v1 
-                    echo "$DOCKER_PASS" | sudo docker login -u "$DOCKER_USER" --password-stdin
-		    sudo docker push amcnssstd/blogimg01:v1
-		    sudo docker logout
-                    '''
 		}
-        }
+      
+      stage('Build Image') {
+      steps {
+             sh 'cd blog && sudo docker build -t blogimg01 .'
+	     }
+	     }
+stage('Tag the image') {
+steps {
+sh 'sudo docker image tag blogimg01 amcnssstd/blogimg01:v1'
+}
+}
+stage('Push the iamge to Docker Hub') {
+steps {
+sh 'echo "$DOCKER_PASS" | sudo docker login -u "$DOCKER_USER" --password-stdin'
+sh 'sudo docker push amcnssstd/blogimg01:v1'
+sh 'sudo docker logout'
+}
+}
 
-    }
+stage('Copy deploy.yaml to Kubernetes Server') {
+steps {
+sh 'scp deploy.yaml ec2-user@172.31.24.198:/home/ec2-user/'
+}
+}
+
+}
 }

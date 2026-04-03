@@ -19,4 +19,4 @@ spec:
     spec:
       containers:
         - name: blog
-          image: susigugh/blog:17-Jul
+          image: amcnssstd/blogimg01:v1
