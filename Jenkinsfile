@@ -16,6 +16,7 @@ pipeline {
 	   steps {
 	      sh 'ls -ltr'
 	      retry(3) {
+	      sh 'sleep 30'
 	      sh 'sudo docker ps'
 	      }
         }
