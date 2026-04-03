@@ -28,6 +28,7 @@ pipeline {
                 )]) {
 	    retry(3) {
                     sh '''
+		    set -e
 		    cd blog && sudo docker build -t blogimg01 .
 		    sudo docker image tag blogimg01 amcnssstd/blogimg01:v1 
                     echo "$DOCKER_PASS" | sudo docker login -u "$DOCKER_USER" --password-stdin
