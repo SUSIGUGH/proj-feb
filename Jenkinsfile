@@ -52,7 +52,7 @@ sh 'sudo docker logout'
 
 stage('Copy deploy.yaml to Kubernetes Server') {
 steps {
-sh 'scp deploy.yaml ec2-user@172.31.24.198:/home/ec2-user/'
+sh 'scp -i kube8s.pem deploy.yaml ec2-user@54.224.65.251:/home/ec2-user/'
 }
 }
 
