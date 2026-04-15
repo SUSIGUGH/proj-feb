@@ -52,7 +52,8 @@ sh 'sudo docker logout'
 
 stage('Copy deploy.yaml to Kubernetes Server') {
 steps {
-sh 'scp -i kube8s.pem deploy.yaml ec2-user@54.224.65.251:/home/ec2-user/'
+sh 'chmod 600 kube8s.pem'
+sh 'scp -o StrictHostKeyChecking=no -i kube8s.pem deploy.yaml ec2-user@54.224.65.251:/home/ec2-user/'
 }
 }
 
