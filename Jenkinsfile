@@ -53,7 +53,7 @@ sh 'sudo docker logout'
 stage('Copy deploy.yaml to Kubernetes Server') {
 steps {
 sh 'chmod 600 kube8s.pem'
-sh 'scp -o StrictHostKeyChecking=no -i kube8s.pem deploy.yaml ec2-user@54.224.65.251:/home/ec2-user/'
+sh 'scp -o StrictHostKeyChecking=no -i kube8s.pem *.yaml ec2-user@54.224.65.251:/home/ec2-user/'
 }
 }
 
@@ -61,7 +61,14 @@ sh 'scp -o StrictHostKeyChecking=no -i kube8s.pem deploy.yaml ec2-user@54.224.65
 stage('Deploy the deployment in Kubernetes Server') {
 steps {
 sh 'chmod 600 kube8s.pem'
-sh 'ssh -o StrictHostKeyChecking=no -i kube8s.pem ec2-user@54.224.65.251 "cd /home/ec2-user/ && export KUBECONFIG=/home/ec2-user/admin.conf && sudo kubectl create -f deploy.yaml"'
+sh 'ssh -o StrictHostKeyChecking=no -i kube8s.pem ec2-user@54.224.65.251 "cd /home/ec2-user/ && export KUBECONFIG=/home/ec2-user/admin.conf && kubectl create -f deploy.yaml"'
+}
+}
+
+stage('Create the service in Kubernetes Server') {
+steps {
+sh 'chmod 600 kube8s.pem'
+sh 'ssh -o StrictHostKeyChecking=no -i kube8s.pem ec2-user@54.224.65.251 "cd /home/ec2-user/ && export KUBECONFIG=/home/ec2-user/admin.conf && kubectl create -f service.yaml"'
 }
 }
 
